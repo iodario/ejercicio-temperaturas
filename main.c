@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include "pila.h"
+
+#define ESC 27
+/*
+printf("\n\n");
+printf("\nESC para salir o cualquier tecla para continuar\n");
+*/
+//prototipos
+void cargaPila (Pila * p, int minimo, int maximo);
+
+int main()
+{
+    Pila temperaturas;
+    inicpila(&temperaturas);
+
+    cargaPila(&temperaturas,10,50);
+    mostrar(&temperaturas);
+
+
+    return 0;
+}
+
+// 1 - carga de pila con intervencion del usuario, validando ingreso dentro de un rango dado -
+void cargaPila (Pila * p, int minimo, int maximo){
+    char opcion;
+    int temp;
+    do{
+        do{
+        printf("\nIngrese una temperatura entre %d y %d grados:\n",minimo,maximo);
+        scanf("%d",&temp);
+        if(temp < minimo || temp > maximo){
+            printf("\nTemperatura incorrecta.\n");
+        }
+            }while(temp < minimo || temp > maximo);
+        apilar(p,temp);
+        printf("\n Desea continuar cargando? ESC para salir o cualq tecla para continuar\n");
+        opcion =getch();
+    }while(opcion!=ESC);
+}
+
